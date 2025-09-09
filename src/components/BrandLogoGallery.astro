@@ -1,0 +1,74 @@
+---
+import Gallery from './Gallery.astro';
+
+// Import brand logo images - easily editable by adding/removing imports
+import deepRoots from '../assets/images/brand logos/Deep-Roots-Roc-Black.png';
+import hollowSpirit from '../assets/images/brand logos/Hollow-Spirit-Studios-Black.png';
+import knaufShaw from '../assets/images/brand logos/Knauf-Shaw-LLP-Black.png';
+import mackenzieChilds from '../assets/images/brand logos/MacKenzie-Childs.png';
+import oakgrove from '../assets/images/brand logos/Oakgrove-Companies-Black.png';
+import paymentCloud from '../assets/images/brand logos/Payment-Cloud-Inc.png';
+import rocNorml from '../assets/images/brand logos/ROC_NORML-Black.png';
+import uncommonSchools from '../assets/images/brand logos/Uncommon-Schools-Rochester-Prep-Black.png';
+
+// Brand logo array - easily editable by adding/removing entries
+const logos = [
+  { src: uncommonSchools, alt: 'Uncommon Schools Rochester Prep' },
+  { src: deepRoots, alt: 'Deep Roots ROC' },
+  { src: hollowSpirit, alt: 'Hollow Spirit Studios' },
+  { src: knaufShaw, alt: 'Knauf Shaw LLP' },
+  { src: mackenzieChilds, alt: 'MacKenzie-Childs' },
+  { src: oakgrove, alt: 'Oakgrove Companies' },
+  { src: paymentCloud, alt: 'Payment Cloud Inc' },
+  { src: rocNorml, alt: 'ROC NORML' },
+];
+---
+
+<div class="brand-gallery">
+  <Gallery images={logos} columns={4} lightbox={false} />
+</div>
+
+<style>
+  .brand-gallery {
+    margin: 2rem 0;
+  }
+
+  /* Override gallery styles for brand logos */
+  .brand-gallery :global(.gallery) {
+    border: 8px solid var(--accent);
+    overflow: hidden;
+    background: var(--background);
+    box-sizing: border-box;
+    padding: 1rem;
+  }
+
+  .brand-gallery :global(.gallery-image) {
+    height: 150px;
+    object-fit: contain;
+    background: transparent;
+    border: none;
+    margin: 0;
+    padding: 1rem;
+    box-sizing: border-box;
+    filter: sepia(1) saturate(2) hue-rotate(25deg) brightness(0.6);
+  }
+
+  .brand-gallery :global(.gallery-item) {
+    cursor: default;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  @media (max-width: 768px) {
+    .brand-gallery :global(.gallery) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .brand-gallery :global(.gallery) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
+

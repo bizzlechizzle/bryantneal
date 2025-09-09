@@ -1,0 +1,33 @@
+{
+  "name": "bryantneal",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Bryant Neal's personal website and portfolio",
+  "license": "MIT",
+  "author": "Bryant Neal",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dennisklappe/astro-theme-terminal"
+  },
+  "keywords": [
+    "astro",
+    "portfolio",
+    "personal-website",
+    "blog"
+  ],
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^4.3.4",
+    "astro": "^5.13.2",
+    "glightbox": "^3.3.1"
+  },
+  "devDependencies": {
+    "@astrojs/rss": "^4.0.11",
+    "@astrojs/sitemap": "^3.2.2"
+  }
+}
