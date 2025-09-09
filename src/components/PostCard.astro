@@ -42,7 +42,14 @@ const isExternal = !!post.data.externalLink;
   )}
   {post.data.image && (
     <figure class="post-cover">
-      <Image src={post.data.title === 'Commercial' ? commercialImage : post.data.image} alt={post.data.title} inferSize={true} style="width: 100%; height: auto;" />
+      {post.data.title === 'Commercial' ? (
+        <a href={postUrl} class="image-overlay-container" target={isExternal ? "_blank" : undefined} rel={isExternal ? "noopener" : undefined}>
+          <Image src={commercialImage} alt={post.data.title} inferSize={true} style="width: 100%; height: auto;" />
+          <div class="image-overlay-text">Commercial</div>
+        </a>
+      ) : (
+        <Image src={post.data.image} alt={post.data.title} inferSize={true} style="width: 100%; height: auto;" />
+      )}
     </figure>
   )}
   {post.data.description && (

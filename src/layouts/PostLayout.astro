@@ -36,7 +36,14 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     
     {image && (
       <figure class="post-cover">
-        <Image src={title === 'Commercial' ? commercialImage : image} alt={title} inferSize={true} style="width: 100%; height: auto;" />
+        {title === 'Commercial' ? (
+          <div class="image-overlay-container">
+            <Image src={commercialImage} alt={title} inferSize={true} style="width: 100%; height: auto;" />
+            <div class="image-overlay-text">Commercial</div>
+          </div>
+        ) : (
+          <Image src={image} alt={title} inferSize={true} style="width: 100%; height: auto;" />
+        )}
       </figure>
     )}
     

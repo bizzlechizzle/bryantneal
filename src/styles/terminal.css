@@ -1,6 +1,15 @@
 /* Fira Code: https://github.com/tonsky/FiraCode */
 @import url('https://cdn.staticdelivr.com/gfonts/css2?family=Fira+Code:wght@300..700&display=swap');
 
+/* Custom fonts */
+@font-face {
+  font-family: 'Boston Skyline Sans Clean';
+  src: url('/fonts/BostonSkylineSansClean.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --background: #fffbf7;
   --foreground: #45372b;
