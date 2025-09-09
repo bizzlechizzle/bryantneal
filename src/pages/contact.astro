@@ -27,7 +27,7 @@ how I can help. Whether it’s video, photos, or just kicking around ideas over 
     
     <div style="margin-top: 2rem;"></div>
     
-    <form name="contact" method="POST" data-netlify="true" enctype="multipart/form-data">
+    <form name="contact" method="POST" data-netlify="true" enctype="multipart/form-data" id="contact-form">
       <input type="hidden" name="form-name" value="contact" />
       <fieldset>
         <input type="text" name="name" placeholder="Name" required><br>
@@ -45,6 +45,10 @@ how I can help. Whether it’s video, photos, or just kicking around ideas over 
         <button type="submit">Send Message</button>
       </fieldset>
     </form>
+    
+    <div id="success-message" style="display: none; text-align: center; margin-top: 2rem; padding: 1.5rem; background-color: var(--accent); border-radius: 8px; max-width: 400px; margin-left: auto; margin-right: auto;">
+      <h3 style="color: #fffbf7; margin: 0;">Thanks! I'll be in touch soon.</h3>
+    </div>
     
   </div>
 
@@ -88,3 +92,33 @@ how I can help. Whether it’s video, photos, or just kicking around ideas over 
     text-align: left;
   }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('contact-form');
+    const successMessage = document.getElementById('success-message');
+    
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const formData = new FormData(form);
+      
+      fetch(form.action || '/', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => {
+        if (response.ok) {
+          form.style.display = 'none';
+          successMessage.style.display = 'block';
+        } else {
+          throw new Error('Form submission failed');
+        }
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        alert('There was an error sending your message. Please try again.');
+      });
+    });
+  });
+</script>
