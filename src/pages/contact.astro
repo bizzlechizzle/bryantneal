@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Contact">
+  <div class="page framed">
+
+  <div style="margin-top: 1rem;">
+
+    <h1>Contact</h1>
+
+  <div style="margin-top: .5rem;">
+
+    <p>
+Every good project starts with a conversation. Tell me what you’re working on, and I’ll share
+how I can help. Whether it’s video, photos, or just kicking around ideas over coffee, I’d love to hear from you.
+    </p>
+    
+    <div class="contact-info">
+      <hr style="margin-top: 2rem;">
+      <h2>Let's Connect</h2>
+      <p><strong>Email:</strong> <a href="mailto:hello@bryantneal.com">hello@bryantneal.com</a></p>
+      <p><strong>Phone:</strong> <a href="tel:585-512-8999">585-512-8999</a></p>
+      <p><strong>Location:</strong> <a href="https://www.google.com/maps/place/Rochester,+NY/" target="_blank" rel="noopener noreferrer">Rochester, New York</a></p>
+    </div>
+    </div>
+    
+    <div style="margin-top: 2rem;"></div>
+    
+    <form name="contact" method="POST" data-netlify="true" enctype="multipart/form-data">
+      <input type="hidden" name="form-name" value="contact" />
+      <fieldset>
+        <input type="text" name="name" placeholder="Name" required><br>
+        <input type="email" name="email" placeholder="Email" required><br>
+        <select name="subject" required>
+          <option value="">Select a project type...</option>
+          <option value="Commercial Project">Commercial Project</option>
+          <option value="Vintage Project">Vintage Project</option>
+          <option value="Abandoned Upstate">Abandoned Upstate</option>
+          <option value="Nightfox Films">Nightfox Films</option>
+          <option value="Other">Other</option>
+        </select><br>
+        <textarea name="message" placeholder="Tell me about your project..." rows="6" required></textarea><br>
+        <input type="file" name="attachment"><br>
+        <button type="submit">Send Message</button>
+      </fieldset>
+    </form>
+    
+  </div>
+
+<div style="margin-top: 2rem;"></div>
+
+  <hr>
+
+<div style="margin-top: 6rem;"></div>
+
+
+</BaseLayout>
+
+
+<style>
+  .page {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  
+  .contact-info {
+    margin: 2rem 0;
+    text-align: center;
+  }
+  
+  .contact-info a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  
+  .contact-info a:hover {
+    text-decoration: underline;
+  }
+  
+  form {
+    margin-top: 2rem;
+    text-align: center;
+  }
+  
+  form fieldset {
+    display: inline-block;
+    text-align: left;
+  }
+</style>
