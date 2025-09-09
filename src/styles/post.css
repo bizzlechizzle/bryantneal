@@ -77,6 +77,17 @@
   padding: 20px;
 }
 
+.post-cover .image-overlay-container {
+  border: 10px solid var(--accent);
+  background: transparent;
+  padding: 20px;
+}
+
+.post-cover .image-overlay-container img {
+  border: none;
+  padding: 0;
+}
+
 .post ul {
   list-style: none;
 }
