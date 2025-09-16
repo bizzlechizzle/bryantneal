@@ -1,12 +1,22 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import bryantImg from '../assets/images/bryant-neal.jpg';
 ---
 
 <BaseLayout title="About">
   <div class="page framed">
-    <h1>About</h1>
-    
-    <p>Coming soon...</p>
+    <h1>Hello there!</h1>
+
+    <Image src={bryantImg} alt="Bryant Neal" style="width: 100%; height: auto; margin: 2rem 0;" />
+
+    <p>
+    I'm Bryant Neal, a content creator based in Rochester, New York. I'm into film, filming, filming on film, and just about anything you can do with a camera. Day to day, I make wedding films on Super 8, camcorders, and modern 4K digital. I started out with photography, and while video is now my main focus, I still take on photography projects for events, portraits, and real estate.
+    </p>
+
+    <p>
+    When it comes to film itself, I'm all about scanning and digitizing old formats. I convert VHS to digital, restore family films, and even create new projects on vintage gear. I still keep things a little old school too, listening to music on iPods and sending emails from a computer. Otherwise, you can usually find me preserving history while documenting decay.
+    </p>
   </div>
 </BaseLayout>
 
