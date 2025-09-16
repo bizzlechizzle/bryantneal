@@ -9,11 +9,6 @@
   border-right: 1px solid color-mix(in srgb, var(--accent) 10%, transparent);
 }
 
-/* Services section - reduce spacing between cards */
-.services .post {
-  padding: 15px 0;
-}
-
 .container.full,
 .container.center {
   border: none;
@@ -32,11 +27,11 @@
 
 /* Index content */
 .index-content {
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 .index-content.framed {
-  margin-bottom: 10px;
+  margin-bottom: 60px;
 }
 
 /* Framed content */
@@ -45,44 +40,34 @@
   padding: 20px;
 }
 
-/* Video grid responsive styles */
-@media (max-width: 768px) {
-  .video-grid {
-    grid-template-columns: 1fr !important;
-    gap: 1.5rem !important;
-  }
-}
-
-/* Modern CSS solution for figure/figcaption layout conflicts */
+/* Figure with caption - matching Hugo theme */
 figure {
   display: inline-block;
-  inline-size: fit-content; /* Shrink-wrap to content */
-  margin-inline: auto;
-  margin-block: 25px;
+  margin: 25px auto;
   padding: 0;
-  overflow: hidden; /* Contain any overflow */
+  background: transparent;
   text-align: center;
+  width: fit-content;
 }
 
 figure img {
   display: block;
-  margin: 0;
-  border: none !important; /* Remove conflicting borders from terminal.css */
-  max-width: 100%;
-  height: auto;
+  margin-bottom: -8px !important;
+  /* Image already has border from terminal.css */
 }
 
-/* Fix figcaption width problem with modern CSS */
+/* Override figcaption from terminal.css to match Hugo theme */
 figure figcaption {
-  contain: inline-size; /* Modern solution to width problem */
-  margin: 0;
-  padding: 5px 20px;
-  background: var(--accent);
-  color: var(--background);
-  border: none;
-  position: static; /* Remove positioning context */
-  font-weight: normal;
-  text-align: center;
+  margin-top: 0 !important;
+  padding: 15px 20px !important;
+  background: var(--accent) !important;
+  color: var(--background) !important;
+  font-weight: normal !important;
+  text-align: center !important;
+  /* Thicker bottom border effect */
+  border: none !important;
+  border-radius: 0 !important;
+  position: relative;
 }
 
 figure figcaption p {
@@ -203,55 +188,4 @@ ul ul {
 ::-moz-selection {
   background: var(--accent);
   color: var(--background);
-}
-
-/* Image overlay styles */
-.image-overlay-container {
-  position: relative;
-  display: inline-block;
-  width: 100%;
-  text-decoration: none;
-  margin: 0;
-  overflow: hidden;
-}
-
-.image-overlay-container::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-color: #df7020;
-  mix-blend-mode: color;
-  opacity: 0.10;
-  pointer-events: none;
-  z-index: 1;
-}
-
-
-
-.image-overlay-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: 'Boston Skyline Sans Clean', Arial, sans-serif;
-  font-size: 2.2rem;
-  font-weight: bold;
-  color: #fffbf7;
-  opacity: 0.90;
-  text-shadow: 8px 3px 8px rgba(0, 0, 0, 0.0);
-  z-index: 2;
-  pointer-events: none;
-  text-align: center;
-  white-space: nowrap;
-  transition: transform 0.3s ease;
-}
-
-a.image-overlay-container:hover .image-overlay-text {
-  transform: translate(-50%, -50%) scale(1.02);
-}
-
-@media (max-width: 684px) {
-  .image-overlay-text {
-    font-size: 1.8rem;
-  }
 }

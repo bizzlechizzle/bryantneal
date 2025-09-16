@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+const services = (await getCollection('services'))
+  .filter(service => !service.data.draft);
+---
+
+<BaseLayout title="Services">
+  <div class="services">
+    <h1 class="services-title">Services</h1>
+    {services.length === 0 ? (
+      <p>No services yet. Check back soon!</p>
+    ) : (
+      services.map((service) => <PostCard post={service} />)
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .services-title {
+    position: relative;
+    color: var(--accent);
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 15px;
+    border-bottom: 3px dotted var(--accent);
+  }
+  
+  .services-title::after {
+    content: "";
+    position: absolute;
+    bottom: 2px;
+    display: block;
+    width: 100%;
+    border-bottom: 3px dotted var(--accent);
+  }
+</style>

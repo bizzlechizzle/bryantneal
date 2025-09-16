@@ -143,29 +143,3 @@
     right: 0;
   }
 }
-
-/* Desktop dropdown styling */
-.menu--desktop .menu__dropdown {
-  min-width: 150px;
-}
-
-.menu--desktop .menu__trigger {
-  padding: 0;
-  border: none;
-  background: none;
-  font-size: inherit;
-  font-family: inherit;
-}
-
-/* Mobile menu section titles */
-.menu__dropdown-title {
-  color: var(--accent);
-  font-weight: bold;
-  margin-top: 10px;
-  margin-bottom: 5px;
-  pointer-events: none;
-}
-
-.menu__dropdown-title:first-child {
-  margin-top: 0;
-}

@@ -1,10 +1,5 @@
 ---
-import { Image } from 'astro:assets';
-import commercialImage from '../assets/images/commercial/commercial-content-creation-rochester-ny.jpg';
-import vintageImage from '../assets/images/vintage/super-8-film-scanning-rochester-ny.jpg';
-import weddingsImage from '../assets/images/weddings/nightfox-films.jpg';
-import heritageImage from '../assets/images/abandoned/abandoned-upstate.jpg';
-import type { ImageMetadata } from 'astro';
+import FormattedDate from './FormattedDate.astro';
 
 export interface Props {
   post: {
@@ -12,8 +7,10 @@ export interface Props {
     data: {
       title: string;
       description?: string;
+      pubDate: Date;
+      author?: string;
       tags?: string[];
-      image?: ImageMetadata;
+      image?: string;
       externalLink?: string;
     };
   };
@@ -21,7 +18,7 @@ export interface Props {
 
 const { post } = Astro.props;
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + '/';
-const postUrl = post.data.externalLink || `${base}services/${post.slug}/`;
+const postUrl = post.data.externalLink || `${base}posts/${post.slug}/`;
 const isExternal = !!post.data.externalLink;
 ---
 
@@ -31,6 +28,14 @@ const isExternal = !!post.data.externalLink;
       {post.data.title}
     </a>
   </h2>
+  <div class="post-meta">
+    <time class="post-date">
+      <FormattedDate date={post.data.pubDate} />
+    </time>
+    {post.data.author && (
+      <span class="post-author">{post.data.author}</span>
+    )}
+  </div>
   {post.data.tags && post.data.tags.length > 0 && (
     <span class="post-tags">
       {post.data.tags.map((tag, index) => (
@@ -40,16 +45,9 @@ const isExternal = !!post.data.externalLink;
       ))}
     </span>
   )}
-  {(post.data.image || post.data.title === 'Vintage Media') && (
+  {post.data.image && (
     <figure class="post-cover">
-      {post.data.title === 'Vintage Media' ? (
-        <a href={postUrl} class="image-overlay-container" target={isExternal ? "_blank" : undefined} rel={isExternal ? "noopener" : undefined}>
-          <Image src={vintageImage} alt={post.data.title} inferSize={true} style="width: 100%; height: auto;" />
-          <div class="image-overlay-text">Vintage Media</div>
-        </a>
-      ) : post.data.image ? (
-        <Image src={post.data.image} alt={post.data.title} inferSize={true} style="width: 100%; height: auto;" />
-      ) : null}
+      <img src={post.data.image} alt={post.data.title} />
     </figure>
   )}
   {post.data.description && (
