@@ -113,6 +113,11 @@
   margin-top: -24px;
 }
 
+/* Add space between title and image on index page */
+.services .post:has(.post-cover) .post-cover {
+  margin-top: 1.5rem;
+}
+
 /* Post navigation */
 .post-nav {
   display: flex;
