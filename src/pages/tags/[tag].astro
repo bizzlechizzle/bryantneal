@@ -5,8 +5,13 @@ import PostCard from '../../components/PostCard.astro';
 
 export async function getStaticPaths() {
   const allServices = await getCollection('services');
-  const uniqueTags = [...new Set(allServices.map(service => service.data.tags).flat())];
-  
+  const uniqueTags = [...new Set(allServices.map(service => service.data.tags || []).flat().filter(Boolean))];
+
+  // If there are no tags, return an empty array
+  if (uniqueTags.length === 0) {
+    return [];
+  }
+
   return uniqueTags.map(tag => {
     const filteredServices = allServices
       .filter(service => service.data.tags?.includes(tag) && !service.data.draft);
