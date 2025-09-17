@@ -3,6 +3,8 @@ import BaseLayout from './BaseLayout.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import { Image } from 'astro:assets';
 import commercialImage from '../assets/images/commercial/commercial-content-creation-rochester-ny.jpg';
+import weddingImage from '../assets/images/weddings/nightfox-films-rochester-ny.jpg';
+import heritageImage from '../assets/images/abandoned/abandoned-upstate.jpg';
 
 import type { ImageMetadata } from 'astro';
 
@@ -14,9 +16,10 @@ export interface Props {
   author?: string;
   image?: ImageMetadata;
   tags?: string[];
+  externalLink?: string;
 }
 
-const { title, description, pubDate, updatedDate, author, image, tags = [] } = Astro.props;
+const { title, description, pubDate, updatedDate, author, image, tags = [], externalLink } = Astro.props;
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + '/';
 ---
 
@@ -34,13 +37,37 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
       )}
     </div>
     
-    {image && (
+    {(image || title === 'Commercial' || title === 'Wedding Films' || title === 'Historical Research') && (
       <figure class="post-cover">
         {title === 'Commercial' ? (
           <div class="image-overlay-container">
             <Image src={commercialImage} alt={title} inferSize={true} style="width: 100%; height: auto;" />
             <div class="image-overlay-text">Commercial</div>
           </div>
+        ) : title === 'Wedding Films' ? (
+          externalLink ? (
+            <a href={externalLink} class="image-overlay-container" target="_blank" rel="noopener">
+              <Image src={weddingImage} alt="Nightfox Films" inferSize={true} style="width: 100%; height: auto;" />
+              <div class="image-overlay-text">Nightfox Films</div>
+            </a>
+          ) : (
+            <div class="image-overlay-container">
+              <Image src={weddingImage} alt="Nightfox Films" inferSize={true} style="width: 100%; height: auto;" />
+              <div class="image-overlay-text">Nightfox Films</div>
+            </div>
+          )
+        ) : title === 'Historical Research' ? (
+          externalLink ? (
+            <a href={externalLink} class="image-overlay-container" target="_blank" rel="noopener">
+              <Image src={heritageImage} alt="Abandoned Upstate" inferSize={true} style="width: 100%; height: auto;" />
+              <div class="image-overlay-text">Abandoned Upstate</div>
+            </a>
+          ) : (
+            <div class="image-overlay-container">
+              <Image src={heritageImage} alt="Abandoned Upstate" inferSize={true} style="width: 100%; height: auto;" />
+              <div class="image-overlay-text">Abandoned Upstate</div>
+            </div>
+          )
         ) : (
           <Image src={image} alt={title} inferSize={true} style="width: 100%; height: auto;" />
         )}

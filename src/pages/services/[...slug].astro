@@ -3,15 +3,37 @@ import { getCollection } from 'astro:content';
 import PostLayout from '../../layouts/PostLayout.astro';
 
 export async function getStaticPaths() {
+  const ordering = new Map([
+    ['Vintage Media', 0],
+    ['Commercial', 1],
+    ['Wedding Films', 2],
+    ['Historical Research', 3],
+  ]);
+
+  const allowedSlugs = new Set([
+    'vintage-photo-video',
+    'commercial-photo-video',
+    'retro-wedding-videography',
+    'abandoned-buildings-ny',
+  ]);
+
   const services = (await getCollection('services'))
-    .filter(service => !service.data.draft);
+    .filter(service => !service.data.draft && allowedSlugs.has(service.slug))
+    .sort((a, b) => {
+      const aTitle = a.data.listingTitle ?? a.data.title;
+      const bTitle = b.data.listingTitle ?? b.data.title;
+      const aRank = ordering.get(aTitle) ?? Number.MAX_SAFE_INTEGER;
+      const bRank = ordering.get(bTitle) ?? Number.MAX_SAFE_INTEGER;
+      if (aRank !== bRank) return aRank - bRank;
+      return aTitle.localeCompare(bTitle);
+    });
   
   return services.map((service, index) => ({
     params: { slug: service.slug },
     props: {
       post: service,
-      prevPost: index < services.length - 1 ? services[index + 1] : null,
-      nextPost: index > 0 ? services[index - 1] : null,
+      prevPost: index > 0 ? services[index - 1] : null,
+      nextPost: index < services.length - 1 ? services[index + 1] : null,
     },
   }));
 }
@@ -33,14 +55,14 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
       {prevPost && (
         <>
           <a href={`${base}services/${prevPost.slug}/`} class="button inline prev">
-            &lt; [<span class="button__text">{prevPost.data.title}</span>]
+            &lt; [<span class="button__text">{prevPost.data.listingTitle ?? prevPost.data.title}</span>]
           </a>
           {prevPost && nextPost && <span>::</span>}
         </>
       )}
       {nextPost && (
         <a href={`${base}services/${nextPost.slug}/`} class="button inline next">
-          [<span class="button__text">{nextPost.data.title}</span>] &gt;
+          [<span class="button__text">{nextPost.data.listingTitle ?? nextPost.data.title}</span>] &gt;
         </a>
       )}
     </div>

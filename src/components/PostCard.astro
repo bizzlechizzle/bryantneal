@@ -1,9 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import commercialImage from '../assets/images/commercial/commercial-content-creation-rochester-ny.jpg';
 import vintageImage from '../assets/images/vintage/super-8-film-scanning-rochester-ny.jpg';
-import weddingsImage from '../assets/images/weddings/nightfox-films.jpg';
-import heritageImage from '../assets/images/abandoned/abandoned-upstate.jpg';
 import type { ImageMetadata } from 'astro';
 
 export interface Props {
@@ -12,6 +9,7 @@ export interface Props {
     data: {
       title: string;
       description?: string;
+      listingTitle?: string;
       tags?: string[];
       image?: ImageMetadata;
       externalLink?: string;
@@ -21,14 +19,18 @@ export interface Props {
 
 const { post } = Astro.props;
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + '/';
-const postUrl = post.data.externalLink || `${base}services/${post.slug}/`;
-const isExternal = !!post.data.externalLink;
+const displayTitle = post.data.listingTitle ?? post.data.title;
+const slug = post.slug;
+const forceInternal = slug === 'retro-wedding-videography' || slug === 'abandoned-buildings-ny';
+const postUrl = forceInternal ? `${base}services/${post.slug}/` : post.data.externalLink || `${base}services/${post.slug}/`;
+const isExternal = !!post.data.externalLink && !forceInternal;
+const shouldShowCover = (!forceInternal && post.data.image) || slug === 'vintage-photo-video';
 ---
 
 <article class="post on-list">
   <h2 class="post-title">
     <a href={postUrl} target={isExternal ? "_blank" : undefined} rel={isExternal ? "noopener" : undefined}>
-      {post.data.title}
+      {displayTitle}
     </a>
   </h2>
   {post.data.tags && post.data.tags.length > 0 && (
@@ -40,9 +42,9 @@ const isExternal = !!post.data.externalLink;
       ))}
     </span>
   )}
-  {(post.data.image || post.data.title === 'Vintage Media') && (
+  {shouldShowCover && (
     <figure class="post-cover">
-      {post.data.title === 'Vintage Media' ? (
+      {slug === 'vintage-photo-video' ? (
         <a href={postUrl} class="image-overlay-container" target={isExternal ? "_blank" : undefined} rel={isExternal ? "noopener" : undefined}>
           <Image src={vintageImage} alt={post.data.title} inferSize={true} style="width: 100%; height: auto;" />
           <div class="image-overlay-text">Vintage Media</div>
