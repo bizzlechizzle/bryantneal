@@ -234,7 +234,7 @@ ul ul {
   left: 50%;
   transform: translate(-50%, -50%);
   font-family: 'Boston Skyline Sans Clean', Arial, sans-serif;
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   font-weight: bold;
   color: #fffbf7;
   opacity: 0.90;
@@ -242,7 +242,6 @@ ul ul {
   z-index: 2;
   pointer-events: none;
   text-align: center;
-  white-space: nowrap;
   transition: transform 0.3s ease;
 }
 
@@ -252,6 +251,6 @@ a.image-overlay-container:hover .image-overlay-text {
 
 @media (max-width: 684px) {
   .image-overlay-text {
-    font-size: 1.8rem;
+    font-size: 1.4rem;
   }
 }
