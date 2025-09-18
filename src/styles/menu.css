@@ -147,6 +147,8 @@
 /* Desktop dropdown styling */
 .menu--desktop .menu__dropdown {
   min-width: 150px;
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 
 .menu--desktop .menu__trigger {
